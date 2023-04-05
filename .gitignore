@@ -1,0 +1,2 @@
+# Compiled proto files
+wirepas_positioning_messaging/proto/*_pb2.py
