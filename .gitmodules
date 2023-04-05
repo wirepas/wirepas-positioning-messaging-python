@@ -1,0 +1,3 @@
+[submodule "backend-apis"]
+	path = backend-apis
+	url = git@github.com:wirepas/backend-apis.git
