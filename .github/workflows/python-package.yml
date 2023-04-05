@@ -36,6 +36,11 @@ jobs:
     - name: Set proto path
       run: echo "PROTO_FOLDER=backend-apis/wpe/protocol_buffers_files" >> $GITHUB_ENV
 
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
@@ -44,15 +49,10 @@ jobs:
 
     - name: Generate proto files
       run: |
-        python3 -m grpc_tools.protoc -I ${{ env.PROTO_FOLDER }} \
+        python -m grpc_tools.protoc -I ${{ env.PROTO_FOLDER }} \
           --python_out=./wirepas_positioning_messaging/proto \
           --grpc_python_out=./wirepas_positioning_messaging/proto \
           ${{ env.PROTO_FOLDER }}/public.proto
-
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
-      with:
-        python-version: ${{ matrix.python-version }}
 
     - name: Install wheel locally
       run: pip install .
@@ -84,7 +84,7 @@ jobs:
         sed -i '/__version__ = /c\__version__ = "${{ env.VERSION }}"' wirepas_positioning_messaging/__about__.py
 
     - name: Build the wheel
-      run: python3 setup.py sdist bdist_wheel
+      run: python setup.py sdist bdist_wheel
     
     - name: Save produced wheel name and path
       run: echo "WHEEL_FILE=$(ls dist/*-py3-none-any.whl)" >> $GITHUB_ENV
