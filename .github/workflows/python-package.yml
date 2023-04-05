@@ -43,8 +43,11 @@ jobs:
 
     - name: Generate proto files
       run: |
-        protoc -I ${{ env.PROTO_FOLDER }} --python_out=./wirepas_positioning_messaging/proto ${{ env.PROTO_FOLDER }}/*.proto
-    
+        python3 -m grpc_tools.protoc -I ${{ env.PROTO_FOLDER }} \
+          --python_out=./wirepas_positioning_messaging/proto \
+          --grpc_python_out=./wirepas_positioning_messaging/proto \
+          ${{ env.PROTO_FOLDER }}/public.proto
+
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2
       with:
