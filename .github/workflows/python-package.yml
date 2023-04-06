@@ -17,9 +17,6 @@ on:
         description: 'Version used on testPypi'
         required: true
 
-env:
-  IMAGE_NAME: 'wirepas/wmm_alpine_cpp'
-
 jobs:
   build:
 
