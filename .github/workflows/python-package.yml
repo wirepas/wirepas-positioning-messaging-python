@@ -102,7 +102,7 @@ jobs:
         upload_url: ${{ github.event.release.upload_url }}
         asset_path: ${{ env.WHEEL_FILE }}
         asset_content_type: application/zip
-        asset_name: wirepas_networktool_messaging-${{ env.VERSION }}-py3-none-any.whl
+        asset_name: wirepas_positioning_messaging-${{ env.VERSION }}-py3-none-any.whl
 
     - name: Publish package to TestPyPI for push to master
       if: ${{ github.event_name == 'workflow_dispatch' && matrix.python-version == '3.10' }}
